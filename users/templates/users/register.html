@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock  %}
+
+
+{% block content %}
+    <div class="centered-container">
+        <form method="POST" action="{% url 'register' %}">
+            <div class="mb-3">
+                <label class="form-label" for="full_name">Full name</label>
+                <input type="text" class="form-control" id="full_name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" class="form-control" id="email">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" class="form-control" id="password">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="confirm_password">Confirm password</label>
+                <input type="password" class="form-control" id="confirm_password">
+            </div>
+            <div class="mb-3">
+                <div  class="form-text">Already have an account? <a href="{% url 'login' %}">Login</a></div>
+            </div>
+            <button class="btn btn-primary" style="width:100%;">Register</button>
+        </form>
+    </div>
+{% endblock  %}
