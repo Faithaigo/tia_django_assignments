@@ -1,11 +1,14 @@
-from django.urls import path
-from .views import Categories, CategoryDetail, Tags, TagDetails, Posts, PostDetails
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import CategoryViewSet, TagsViewSet, PostsViewSet
+
+router = DefaultRouter()
+
+router.register(r'categories', CategoryViewSet, basename='category')
+router.register(r'tags', TagsViewSet, basename='tag')
+router.register(r'', PostsViewSet, basename='post')
 
 urlpatterns = [
-    path('category', Categories.as_view()),
-    path('category/<int:pk>', CategoryDetail.as_view()),
-    path('tag', Tags.as_view()),
-    path('tag/<int:pk>', TagDetails.as_view()),
-    path('', Posts.as_view()),
-    path('<int:pk>', PostDetails.as_view())
+    path('', include(router.urls)),
+
 ]
