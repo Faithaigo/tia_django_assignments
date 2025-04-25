@@ -14,12 +14,4 @@ class UsersSerializer(serializers.ModelSerializer):
         }
 
 
-    def create(self, validated_data):
-        user = User(
-            full_name = validated_data['full_name'],
-            username = validated_data['user_name'],
-            email = validated_data['email']
-        )
-        user.set_password(validated_data['password'])  # Hash password
-        user.save()
-        return user
+    # TODO: Figure out how to hash a password
