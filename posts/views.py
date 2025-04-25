@@ -1,3 +1,22 @@
-from django.shortcuts import render
+from rest_framework import generics
+from .serializers import CategorySerializer, TagSerializer
+from .models import Category, Tag
 
-# Create your views here.
+
+class Categories(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+class Tags(generics.ListCreateAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+
+class TagDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
