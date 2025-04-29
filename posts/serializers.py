@@ -34,6 +34,7 @@ class TagSerializer(serializers.ModelSerializer):
         return tag
 
 class PostSerializer(serializers.ModelSerializer):
+    author = serializers.ReadOnlyField(source='author.username')
 
     # TODO: Get author, category and tags data
 
@@ -41,15 +42,3 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ['id','title','content','slug','created_at','author','category','tags']
         read_only_fields = ['slug','created_at']
-
-    def create(self, validated_data):
-        post = Post(
-            title=validated_data['title'],
-            content=validated_data['content'],
-            author=validated_data['author'],
-            category=validated_data['category'],
-            slug = generate_unique_slug(Post, validated_data['title'])
-        )
-        post.save()
-        post.tags.set(validated_data['tags'])
-        return post
